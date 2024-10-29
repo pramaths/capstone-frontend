@@ -89,6 +89,11 @@ export default function ResearchPaperPage() {
       });
     } catch (error) {
       console.error('Error analyzing file:', error);
+      setAnalysis({
+        fileName: file.name,
+        summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        fileUrl: URL.createObjectURL(file)
+      });
       notify('Error analyzing file. Please try again.');
     } finally {
       setIsLoading(false);
@@ -159,7 +164,7 @@ export default function ResearchPaperPage() {
     <div className="w-full font-josefin bg-white border-4 border-white-700 h-screen overflow-hidden">
       <div className="w-full flex flex-row justify-between items-center">
         <div className="text-black flex">
-          <a href="/home">
+          <a href="/">
             <FaHome className="text-2xl m-2" />
           </a>
           <div className="p-2 text-black font-bold text-center">
