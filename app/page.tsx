@@ -62,25 +62,28 @@ export default function ResearchPaperPage() {
       await handleFileUpload(files[0]);
     }
   };
-
   const handleFileUpload = async (file: File) => {
     if (!file.type.includes('pdf')) {
       notify('Please upload a PDF file');
       return;
     }
-
+  
     setSelectedFile(file);
     setIsLoading(true);
-
+  
     const formData = new FormData();
     formData.append('file', file);
-
+  
     try {
       const response = await fetch('http://localhost:8000/analyze', {
         method: 'POST',
         body: formData,
       });
-
+  
+      if (!response.ok) {
+        throw new Error('Failed to analyze file');
+      }
+  
       const data = await response.json();
       setAnalysis({
         fileName: file.name,
@@ -89,17 +92,20 @@ export default function ResearchPaperPage() {
       });
     } catch (error) {
       console.error('Error analyzing file:', error);
+  
+      // Set a default summary and fileUrl for failure case
       setAnalysis({
         fileName: file.name,
         summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        fileUrl: URL.createObjectURL(file)
+        fileUrl: URL.createObjectURL(file)  // Display the uploaded PDF
       });
+  
       notify('Error analyzing file. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const handleTextToSpeech = (text: string) => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
