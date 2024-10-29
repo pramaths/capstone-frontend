@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaHome } from "react-icons/fa";
 import { AiOutlineCloudUpload, AiOutlineLoading } from "react-icons/ai";
 import { MdVolumeUp, MdContentCopy } from "react-icons/md";
-// import toast, { Toaster, ToastOptions } from "react-hot-toast";
+import toast, { Toaster, ToastOptions } from "react-hot-toast";
 
 interface AnalysisResult {
   fileName?: string;
@@ -17,23 +17,23 @@ export default function ResearchPaperPage() {
   const [analysis, setAnalysis] = useState<AnalysisResult | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  // const toastOptions: ToastOptions = {
-  //   duration: 4000,
-  //   position: "top-center",
-  //   style: {},
-  //   className: "",
-  //   icon: "",
-  //   iconTheme: {
-  //     primary: "#000",
-  //     secondary: "#fff",
-  //   },
-  //   ariaProps: {
-  //     role: "status",
-  //     "aria-live": "polite",
-  //   },
-  // };
+  const toastOptions: ToastOptions = {
+    duration: 4000,
+    position: "top-center",
+    style: {},
+    className: "",
+    icon: "",
+    iconTheme: {
+      primary: "#000",
+      secondary: "#fff",
+    },
+    ariaProps: {
+      role: "status",
+      "aria-live": "polite",
+    },
+  };
 
-  // const notify = (message: string) => toast(message, toastOptions);
+  const notify = (message: string) => toast(message, toastOptions);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ export default function ResearchPaperPage() {
 
   const handleFileUpload = async (file: File) => {
     if (!file.type.includes('pdf')) {
-      // notify('Please upload a PDF file');
+      notify('Please upload a PDF file');
       return;
     }
 
@@ -89,7 +89,7 @@ export default function ResearchPaperPage() {
       });
     } catch (error) {
       console.error('Error analyzing file:', error);
-      // notify('Error analyzing file. Please try again.');
+      notify('Error analyzing file. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -103,7 +103,7 @@ export default function ResearchPaperPage() {
 
   const handleCopyText = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      // notify("Text copied to clipboard!");
+      notify("Text copied to clipboard!");
     }).catch((error) => {
       console.error("Error copying text:", error);
     });
@@ -213,7 +213,7 @@ export default function ResearchPaperPage() {
           </div>
         </div>
       </div>
-      {/* <Toaster /> */}
+      <Toaster />
     </div>
   );
 }
