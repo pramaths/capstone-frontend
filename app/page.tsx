@@ -377,7 +377,7 @@ export default function ResearchPaperPage() {
 
     if (typeof analysis.summary === 'string') {
       return (
-        <div className="mb-4 text-gray-600">
+        <div className="mb-4 text-black">
           <p>{analysis.summary}</p>
           <button
             onClick={() => handleCopyText(analysis.summary as string)}
@@ -391,7 +391,7 @@ export default function ResearchPaperPage() {
 
     return Object.entries(analysis.summary).map(([section, content]) => (
       <div key={section} className="mb-6">
-        <h4 className="font-bold text-lg mb-2">{section}</h4>
+        <h4 className="font-bold text-lg mb-2 text-black">{section}</h4>
         <p className="text-gray-700">{content}</p>
         <button
           onClick={() => handleCopyText(content)}
