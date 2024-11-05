@@ -282,7 +282,7 @@ export default function ResearchPaperPage() {
     position: "top-center",
     style: {},
     className: "",
-    icon: "😍😍",
+    icon: "🚀🚀🦾🦾",
     iconTheme: {
       primary: "#000",
       secondary: "#fff",
